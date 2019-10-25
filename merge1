@@ -33,10 +33,45 @@ nums1 = [...nums1,...arr]
 //function merge
 function merge(nums1, m, nums2, n){
 	nums1.length = m;
-	let res = [...nums1,...nums2].sort((a,b)=>{return a-b});
-	nums1.splice(0, nums1.length);
-	for(let item of res){
-		nums1.push(item);
+	for(let item2 of nums2){
+
+		findPlace();
+
+		function findPlace(index1=0,index2=nums1.length-1){
+
+				if((index2-index1)/2!==0.5){
+					let position = Math.floor(index1 + (index2-index1)/2)
+					if(item2<nums1[position]){
+						index2 = position;
+						findPlace(index1,index2);
+						return;
+					}
+					if(item2>nums1[position]){
+						index1 = position;
+						findPlace(index1,index2);
+						return;
+					}
+					if(item2===nums1[position]){
+						nums1.splice(position,0,item2);
+						return;
+					}
+				}else {
+					if(item2<=nums1[index1]){
+						nums1.splice(index1,0,item2);
+						return;
+					}
+					if(item2<=nums1[index2]){
+						nums1.splice(index2,0,item2);
+						return;
+					}
+					if(item2>nums1[index2]){
+						nums1.splice(index2+1,0,item2);
+						return;
+					}
+				}
+
+		}
+
 	}
 }
 //function merge
