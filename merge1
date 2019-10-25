@@ -1,0 +1,48 @@
+	//получаем массивы
+function getArr(length){
+	let arr = []
+	let min = 1;
+	let max = 1000000;
+	for(let i=0; i<length; i++){
+		item = Math.floor(Math.random() * (max - min)) + min;
+		arr.push(item);
+	}
+	return arr;
+}
+
+function sortArr(arr){
+	arr.sort((a,b)=>a-b)
+	return arr;
+}
+
+function getSortArr(length){
+	let arr = getArr(length);
+	return sortArr(arr);
+}
+
+nums1 = getSortArr(100000);
+m = nums1.length;
+nums2 = getSortArr(100000);
+n = nums2.length;
+let arr = [];
+arr.length = n;
+arr.fill(0);
+nums1 = [...nums1,...arr]
+//получаем массивы
+
+//function merge
+function merge(nums1, m, nums2, n){
+	nums1.length = m;
+	let res = [...nums1,...nums2].sort((a,b)=>{return a-b});
+	nums1.splice(0, nums1.length);
+	for(let item of res){
+		nums1.push(item);
+	}
+}
+//function merge
+console.log(new String(nums1) , m, new String(nums2) , n)
+let start = Date.now();
+merge(nums1, m, nums2, n)
+let finish = Date.now();
+console.log(nums1, m, nums2, n)
+console.log(finish-start);
